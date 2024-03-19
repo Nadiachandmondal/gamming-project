@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="wrapper">
+    <nav class="nav">
+        <div class="nav-logo">
+            <p>LOGO .</p>
+        </div>
+        <div class="nav-menu" id="navMenu">
+            <ul>
+                <li><a href="#" class="link active">Home</a></li>
+                <li><a href="#" class="link">About Us</a></li>
+                <li><a href="#" class="link">Popular Game</a></li>
+                <li><a href="#" class="link">Contact Me</a></li>
+            </ul>
+        </div>
+        <div class="nav-button">
+            <button class="btn white-btn" id="loginBtn" onclick="login()">Sign In</button>
+            <button class="btn" id="registerBtn" onclick="register()">Sign Up</button>
+        </div>
+        <div class="nav-menu-btn">
+            <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+        </div>
+    </nav>
+
+<!---------------------------------Form box------------------------------------->
+    <div class="form-box">
+                <!------------------------login form----------------------------->
+                <div class="login-container" id="login">
+                    <!-- Close button for the login form -->
+                    <div class="close-btn" id="loginCloseBtn" onclick="closeForm('login')" style="cursor: pointer !important; color: #fff; font-size: 30px;">x</div>
+
+                    <div class="top">
+                       <span>Don't Have an account? <a href="#" onclick="register()">Sign Up</a></span> 
+                       <header>Login</header>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" class="input-field" placeholder="Username or Email">
+                        <i class="bx bx-user"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" class="input-field" placeholder="Password">
+                        <i class="bx bx-lock-alt"></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="submit" class="submit"value="Sign In">
+                    </div>
+                    <div class="two-col">
+                        <div class="one">
+                            <input type="checkbox" id="login-check">
+                            <label for="login-check">Remember Me</label>
+                        </div>
+                        <div class="two">
+                            <label><a href="#">Forgot password?</a></label>
+                        </div>
+                    </div>
+                </div>
+        <!------------------------registration form----------------------------->
+        <div class="register-container" id="register">
+            
+        <!-- Close button for the registration form ---------------------------->
+        <div class="close-btn" onclick="closeForm('register')" style="cursor: pointer !important; color: #fff; font-size: 30px;">x</div>
+
+            <div class="top">
+               <span>Have an account? <a href="#" onclick="login()">Login</a></span> 
+               <header>Sign Up</header>
+            </div>
+            <div class="two-forms">
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Firstname">
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" class="input-field" placeholder="Lastname">
+                    <i class="bx bx-user"></i>
+                </div>
+            </div>
+            <div class="input-box">
+                <input type="text" class="input-field" placeholder="Email">
+                <i class="bx bx-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" placeholder="Password">
+                <i class="bx bx-lock-alt"></i>
+            </div>
+            <div class="input-box">
+                <input type="submit" class="submit" value="Register">
+            </div>
+            <div class="two-col">
+                <div class="one">
+                    <input type="checkbox" id="register-check">
+                    <label for="register-check">Remember Me</label>
+                </div>
+                <div class="two">
+                    <label><a href="#">Terms & conditions</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+function closeForm(formToClose) {
+    var loginForm = document.getElementById("login");
+    var registerForm = document.getElementById("register");
+
+
+    if (formToClose === "login") {
+        loginForm.style.left = "-510px";
+    } else if (formToClose === "register") {
+        registerForm.style.right = "-520px";
+    }
+}
+
+
+
+var menuButtonClicked = false;
+
+
+function setInitialMenuState() {
+    var navMenu = document.getElementById("navMenu");
+
+    
+    if (window.innerWidth <= 786 && menuButtonClicked) {
+      
+        navMenu.classList.add("responsive");
+        navMenu.style.top = "100px";
+    } else {
+     
+        
+        navMenu.classList.remove("responsive");
+        navMenu.style.top = "-800px";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", setInitialMenuState);
+
+
+function myMenuFunction() {
+    var navMenu = document.getElementById("navMenu");
+    navMenu.classList.toggle("responsive");
+    
+    
+    menuButtonClicked = navMenu.classList.contains("responsive");
+
+ 
+    if (!navMenu.classList.contains("responsive")) {
+        navMenu.style.top = "-800px";
+    } else {
+        navMenu.style.top = "100px";
+    }
+}
+
+function disableScroll() {
+   
+    var scrollPosition = [
+        self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+        self.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
+    ];
+
+    var html = document.querySelector('html');
+    html.data = scrollPosition;
+
+    
+    html.style.overflow = 'hidden';
+    html.style.position = 'fixed';
+    html.style.width = '100%';
+}
+
+
+function enableScroll() {
+    
+    var scrollPosition = document.querySelector('html').data;
+
+   
+    window.scrollTo(scrollPosition[0], scrollPosition[1]);
+
+   
+    document.querySelector('html').style.overflow = 'visible';
+    document.querySelector('html').style.position = 'static';
+}
+
+
+disableScroll();
+
+
+
+
+
+</script>
+<script>
+    var loginBtn = document.getElementById("loginBtn");
+    var registerBtn = document.getElementById("registerBtn");
+    var loginForm = document.getElementById("login");
+    var registerForm = document.getElementById("register");
+
+    function hideForms() {
+        loginForm.style.left = "-510px";
+        registerForm.style.right = "-520px";
+    }
+
+    function toggleForm(formToShow) {
+        hideForms();
+        
+        if (formToShow === "login") {
+            loginForm.style.left = "4px";
+        } else if (formToShow === "register") {
+            registerForm.style.right = "5px";
+        }
+    }
+
+
+    hideForms();
+
+    loginBtn.addEventListener("click", function () {
+        toggleForm("login");
+    });
+
+    registerBtn.addEventListener("click", function () {
+        toggleForm("register");
+    });
+</script>
+
+
+
+</body>
+</html>
